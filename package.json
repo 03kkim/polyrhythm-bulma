@@ -6,9 +6,14 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "bulma": "^0.9.3",
+    "bulma-extensions": "^6.2.7",
+    "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
+    "sass": "^1.45.2",
+    "tone": "^14.7.77",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

@@ -1,0 +1,2 @@
+# Todos
+- Implement tempo slider
