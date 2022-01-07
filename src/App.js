@@ -10,7 +10,10 @@ function App() {
   const synthA = new Tone.FMSynth().toDestination();
   const clickLoop = useRef(null);
 
+  const subdivisionLength = "32n";
+  const attackReleaseLength = parseInt(subdivisionLength.replace('n', '') * 2).toString() + "n";
   /**
+   * CREDIT TO RENZO (renzol2) FOR FIGURING THIS OUT
    * Changes button color based on time:
    * - if round(time) is odd, make it normal
    * - if round(time) is even, make it a warning
@@ -19,6 +22,8 @@ function App() {
   function changeButtonColor(time) {
     console.log(buttonColor);
     const timeInt = Math.round(time);
+    console.log("Color change: " + time);
+    console.log("bruh:" + attackReleaseLength)
     if (timeInt % 2 === 0) {
       setButtonColor("warning");
     } else {
@@ -34,11 +39,12 @@ function App() {
       console.log("stop audio");
     } else {
       setIsPlaying(true);
+      // The loop is initialized in clickLoop, which is a useRef() which means that it persists through renders
       clickLoop.current = new Tone.Loop((time) => {
-        synthA.triggerAttackRelease("C2", "32n", time);
+        synthA.triggerAttackRelease("C2", attackReleaseLength, time);
         console.log(time);
         changeButtonColor(time);
-      }, "2n");
+      }, subdivisionLength);
       clickLoop.current.start(0);
       Tone.Transport.start();
       console.log("audio is ready");

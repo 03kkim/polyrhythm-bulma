@@ -14,3 +14,7 @@
 - Renzo's covid sonification built in React and Tone
   - https://github.com/renzol2/covid19ds (code)
   - https://renzol2.github.io/covid19ds/ (app)
+- Time notation
+  - https://github.com/Tonejs/Tone.js/issues/374
+- Commiting only certain files:
+  - https://stackoverflow.com/questions/7239333/how-do-i-commit-only-some-files
