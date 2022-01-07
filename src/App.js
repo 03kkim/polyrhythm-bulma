@@ -1,47 +1,56 @@
 import './App.sass';
-//import bulmaSlider from 'bulma-extensions/bulma-slider/dist/js/bulma-slider.min.js';
-//import 'bulma-extensions/bulma-slider/dist/css/bulma-slider.min.css';
-import { bulmaSlider } from 'bulma-extensions/bulma-slider/dist/js/bulma-slider';
 import * as Tone from 'tone';
-import { useState, useEffect } from 'react';
-import { Button } from './FlashingButton';
+import { useState, useEffect, useRef } from "react";
+import { Button } from "./FlashingButton";
+
 function App() {
   const [buttonColor, setButtonColor] = useState("");
-  let synth = new Tone.Synth().toDestination();
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const synthA = new Tone.FMSynth().toDestination();
-  function attackAndChangeColor(time) {
-    synthA.triggerAttackRelease("C2", "16n", time);
-    changeButtonColor();
-  }
+  const clickLoop = useRef(null);
 
-  async function startTone() {
-    await Tone.start();
-    Tone.Transport.start();
-    console.log('audio is ready');
-  }
-  const changeButtonColor = () => {
-    if (buttonColor === "warning") {
-      setButtonColor("");
-    } else {
+  /**
+   * Changes button color based on time:
+   * - if round(time) is odd, make it normal
+   * - if round(time) is even, make it a warning
+   * @param {Number} time current time of loop
+   */
+  function changeButtonColor(time) {
+    console.log(buttonColor);
+    const timeInt = Math.round(time);
+    if (timeInt % 2 === 0) {
       setButtonColor("warning");
-      //synth.triggerAttackRelease("C4", "32n");
+    } else {
+      setButtonColor("");
     }
   }
 
-  useEffect (() => {
-    const loopA = new Tone.Loop(time => {
-      attackAndChangeColor(time);
-    }, "1n").start(0);
-  }, []);
+  function startTone() {
+    if (isPlaying) {
+      setIsPlaying(false);
+      clickLoop.current.dispose();
+      Tone.Transport.cancel();
+      console.log("stop audio");
+    } else {
+      setIsPlaying(true);
+      clickLoop.current = new Tone.Loop((time) => {
+        synthA.triggerAttackRelease("C2", "32n", time);
+        console.log(time);
+        changeButtonColor(time);
+      }, "2n");
+      clickLoop.current.start(0);
+      Tone.Transport.start();
+      console.log("audio is ready");
+    }
+  }
 
   return (
     <div>
       <div className="box has-text-centered">
-        <Button color={buttonColor} onClick={startTone} />
+        <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} />
       </div>
     </div>
-
   );
 }
 
