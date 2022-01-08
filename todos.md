@@ -8,6 +8,8 @@
 - Need to be able to execute the loop such that the color changes with the loop without needing to rerender
   - The reason it's not working is because the call to attackAndChangeColor() is still happening within the UseEffect() in the stack, meaning it's not rerendering even though everything is defined outside (because it's called inside UseEffect)
   - FIXED!! THANKS RENZO (https://codesandbox.io/s/gallant-meninsky-k9pxe?file=/src/App.js)
+- Renzo's solution used the (time) parameter and some math, but floating point error made it very hard if not impossible to deal with more complex tuplets
+  - Solution: Use a useRef() hook to keep track of the beats, eliminating the need for time math completely
 
 
 # Resources

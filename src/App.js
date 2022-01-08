@@ -12,7 +12,7 @@ function App() {
   // keeps track of current beat 
   const currentBeat = useRef(0);
 
-  const subdivisionLength = "2n";
+  const subdivisionLength = "5n";
   const attackReleaseLength = parseInt(subdivisionLength.replace('n', '') * 2).toString() + "n";
   /**
    * CREDIT TO RENZO (renzol2) FOR FIGURING THIS OUT
