@@ -1,7 +1,7 @@
 import './App.sass';
 import * as Tone from 'tone';
 import { useState, useEffect, useRef } from "react";
-import { Button } from "./FlashingButton";
+import { Button, Slider } from "./components";
 
 function App() {
   const [buttonColor, setButtonColor] = useState("");
@@ -11,9 +11,13 @@ function App() {
   const clickLoop = useRef(null);
   // keeps track of current beat 
   const currentBeat = useRef(0);
+  const [currentTempo, setTempo] = useState(60);
 
   const subdivisionLength = "5n";
   const attackReleaseLength = parseInt(subdivisionLength.replace('n', '') * 2).toString() + "n";
+
+  const [sliderValue, setSliderValue] = useState(50);
+
   /**
    * CREDIT TO RENZO (renzol2) FOR FIGURING THIS OUT
    * Changes button color based on time:
@@ -49,16 +53,24 @@ function App() {
       clickLoop.current.start(0);
       Tone.Transport.start();
       // sets Transport's BPM
-      Tone.Transport.bpm.value = 120;
+      Tone.Transport.bpm.value = currentTempo;
       console.log("audio is ready");
     }
   }
-
+  function updateSliderValue() {
+    setSliderValue(document.getElementById("slider").value);
+  }
+  // useEffect(() => {
+  //   updateSliderValue();
+  // },[sliderValue])
   return (
     <div>
       <div className="box has-text-centered">
-        <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} />
+        <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} name="main button" />
       </div>
+      <Slider defaultValue={currentTempo} onInput={updateSliderValue}></Slider>
+      <h1>{sliderValue}</h1>
+      <Button color="success" name="change tempo" />
     </div>
   );
 }

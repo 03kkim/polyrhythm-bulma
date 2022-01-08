@@ -10,6 +10,7 @@
   - FIXED!! THANKS RENZO (https://codesandbox.io/s/gallant-meninsky-k9pxe?file=/src/App.js)
 - Renzo's solution used the (time) parameter and some math, but floating point error made it very hard if not impossible to deal with more complex tuplets
   - Solution: Use a useRef() hook to keep track of the beats, eliminating the need for time math completely
+- Implementing a working slider to control tempo
 
 
 # Resources
@@ -20,3 +21,7 @@
   - https://github.com/Tonejs/Tone.js/issues/374
 - Commiting only certain files:
   - https://stackoverflow.com/questions/7239333/how-do-i-commit-only-some-files
+- A working volume slider using Tone and React:
+  - https://stackoverflow.com/questions/63595019/how-to-enable-volume-slider-of-player-tone-js-inside-of-useeffect-hookreact
+  - https://codesandbox.io/s/web-audio-api-playground-v2-forked-y1dc6?file=/src/components/DrumMachine.js
+- 
