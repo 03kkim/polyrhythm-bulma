@@ -1,7 +1,7 @@
 import './App.sass';
 import * as Tone from 'tone';
 import { useState, useEffect, useRef } from "react";
-import { Button } from "./FlashingButton";
+import { Button } from "./components/FlashingButton";
 
 function App() {
   const [buttonColor, setButtonColor] = useState("");
