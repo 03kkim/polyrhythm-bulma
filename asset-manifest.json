@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/polyrthm/static/css/main.9958baee.css",
-    "main.js": "/polyrthm/static/js/main.8d817409.js",
+    "main.js": "/polyrthm/static/js/main.ba8ef00a.js",
     "static/js/787.fe1fd2ee.chunk.js": "/polyrthm/static/js/787.fe1fd2ee.chunk.js",
     "index.html": "/polyrthm/index.html",
     "main.9958baee.css.map": "/polyrthm/static/css/main.9958baee.css.map",
-    "main.8d817409.js.map": "/polyrthm/static/js/main.8d817409.js.map",
+    "main.ba8ef00a.js.map": "/polyrthm/static/js/main.ba8ef00a.js.map",
     "787.fe1fd2ee.chunk.js.map": "/polyrthm/static/js/787.fe1fd2ee.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9958baee.css",
-    "static/js/main.8d817409.js"
+    "static/js/main.ba8ef00a.js"
   ]
 }
