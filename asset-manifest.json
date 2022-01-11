@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/polyrhythm-bulma/static/css/main.9958baee.css",
-    "main.js": "/polyrhythm-bulma/static/js/main.0b449b8e.js",
+    "main.js": "/polyrhythm-bulma/static/js/main.060bff46.js",
     "static/js/787.fe1fd2ee.chunk.js": "/polyrhythm-bulma/static/js/787.fe1fd2ee.chunk.js",
     "index.html": "/polyrhythm-bulma/index.html",
     "main.9958baee.css.map": "/polyrhythm-bulma/static/css/main.9958baee.css.map",
-    "main.0b449b8e.js.map": "/polyrhythm-bulma/static/js/main.0b449b8e.js.map",
+    "main.060bff46.js.map": "/polyrhythm-bulma/static/js/main.060bff46.js.map",
     "787.fe1fd2ee.chunk.js.map": "/polyrhythm-bulma/static/js/787.fe1fd2ee.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9958baee.css",
-    "static/js/main.0b449b8e.js"
+    "static/js/main.060bff46.js"
   ]
 }
