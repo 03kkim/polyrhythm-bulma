@@ -1,3 +1,13 @@
+# Polyrthm
+
+This is a personal project I made in order to teach myself to work with ReactJS
+and a music library called Tone.js. It's still under development, but if you'd
+like to check it out, it's available at
+[03kkim.github.io/polyrthm](03kkim.github.io/polyrthm).
+
+Thanks for stopping by!
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
