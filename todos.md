@@ -10,6 +10,9 @@
   - FIXED!! THANKS RENZO (https://codesandbox.io/s/gallant-meninsky-k9pxe?file=/src/App.js)
 - Renzo's solution used the (time) parameter and some math, but floating point error made it very hard if not impossible to deal with more complex tuplets
   - Solution: Use a useRef() hook to keep track of the beats, eliminating the need for time math completely
+- The issue seems to be that after a certain number of rerenders, the Tone.js audio breaks
+  - I think the solution is useMemo(). Need to experiment, however
+  - 
 
 
 # Resources
@@ -20,3 +23,10 @@
   - https://github.com/Tonejs/Tone.js/issues/374
 - Commiting only certain files:
   - https://stackoverflow.com/questions/7239333/how-do-i-commit-only-some-files
+- Function expressions vs declarations:
+  - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function
+  - Function expressions CANNOT BE HOISTED
+- Tone visual synchronization
+  - https://github-wiki-see.page/m/Tonejs/Tone.js/wiki/Performance
+  - "If you're using Tone.Transport, it is important that you do not make draw calls or DOM manipulations inside of the callback provided by Tone.Transport or any of the classes that extend Tone.Event (Part, Sequence, Pattern, Loop)"
+  - 
