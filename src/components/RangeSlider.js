@@ -24,7 +24,7 @@ export const RangeSlider = memo(
         onChange(sliderVal);
     }
     }, [mouseState]);
-    console.log("RENDER");
+    // console.log("RENDER");
     return (
     <div className="range-slider">
         <p>{label}</p>
