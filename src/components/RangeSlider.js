@@ -5,7 +5,7 @@ import React, {
     useState,
     useEffect,
   } from "react";
-
+import "./Slider.css";
 export const RangeSlider = memo(
 ({ classes, label, onChange, value, ...sliderProps }) => {
     const [sliderVal, setSliderVal] = useState(0);

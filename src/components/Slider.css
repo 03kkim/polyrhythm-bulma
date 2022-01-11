@@ -13,6 +13,7 @@
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
+    border-radius: 5px;
   }
   
   /* Mouse-over effects */
@@ -28,6 +29,7 @@
     height: 25px; /* Slider handle height */
     background: #04AA6D; /* Green background */
     cursor: pointer; /* Cursor on hover */
+    border-radius: 5px;
   }
   
   .slider::-moz-range-thumb {
@@ -35,4 +37,5 @@
     height: 25px; /* Slider handle height */
     background: #04AA6D; /* Green background */
     cursor: pointer; /* Cursor on hover */
+    border-radius: 5px;
   }

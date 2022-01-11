@@ -84,13 +84,16 @@ function App() {
   );
 
   return (
-    <div>
-      <div className="box has-text-centered">
+    <>
+    <div className="container is-fluid pt-5 has-text-centered">
+      <h2 className="title is-2">Polyrthm</h2>
+      <p class="subtitle is-4">The web-based polyrhythm trainer</p>
+      <div className="box">
         <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} />
+        <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
       </div>
-      <RangeSlider {...sliderProps} min={33} max={1000} />
-      
     </div>
+    </>
   );
 }
 
