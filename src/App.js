@@ -128,10 +128,10 @@ function App() {
         <Box>
           <div className="columns">
             <div className="column">
-            <input id="text1" className="input" type="text" placeholder="Note 1 (default: quarter)" />
+            <input id="text1" className="input" type="text" placeholder="Kick (default: quarter)" />
             </div>
             <div className="column">
-            <input id="text2" className="input" type="text" placeholder="Note 2 (default: quarter)" />
+            <input id="text2" className="input" type="text" placeholder="Hihat (default: quarter)" />
             </div>
           </div>
           <h2 className="subtitle-6 mb-3">Make sure to restart the metronome!</h2>
