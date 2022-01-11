@@ -38,6 +38,8 @@ export const RangeSlider = memo(
         onChange={changeCallback}
         onMouseDown={() => setMouseState("down")}
         onMouseUp={() => setMouseState("up")}
+        onTouchStart={() => setMouseState("down")}
+        onTouchEnd={() => setMouseState("up")}
         />
     </div>
     );
