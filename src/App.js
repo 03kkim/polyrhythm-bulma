@@ -99,33 +99,35 @@ function App() {
   );
 
   return (
-    <>
-    <div className="container is-fluid pt-5 has-text-centered mb-6">
-      <h2 className="title is-2">Polyrthm</h2>
-      <p className="subtitle is-4">The web-based polyrhythm trainer</p>
-      <div className="box">
-        <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} spacing="mb-3" />
-        <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
-      </div>
-      <div className="box">
-        <div className="columns">
-          <div className="column">
-          <input className="input" type="text" placeholder="Note 1" />
-          </div>
-          <div className="column">
-          <input className="input" type="text" placeholder="Note 2" />
-          </div>
+    <div className="Site">
+      <main class="Site-content">
+      <div className="container is-fluid pt-5 has-text-centered mb-6">
+        <h2 className="title is-2">Polyrthm</h2>
+        <p className="subtitle is-4">The web-based polyrhythm trainer</p>
+        <div className="box mb-6">
+          <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} spacing="mb-3" buttonContent="Click me to start!" />
+          <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
         </div>
-        <Button />
+        <div className="box">
+          <div className="columns">
+            <div className="column">
+            <input className="input" type="text" placeholder="Note 1" />
+            </div>
+            <div className="column">
+            <input className="input" type="text" placeholder="Note 2" />
+            </div>
+          </div>
+          <Button buttonContent="Change polyrhythm" />
+        </div>
       </div>
+      </main>
+      <footer className="footer">
+        <div className="content has-text-centered">
+          <strong>Polyrthm</strong> by <a href="https://github.com/03kkim">Kyu Hong Kim</a>.
+          The <a href="https://github.com/03kkim/polyrhythm-bulma/tree/master">source code</a> is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+          </div>
+      </footer>
     </div>
-    <footer className="footer">
-      <div className="content has-text-centered">
-        <strong>Polyrthm</strong> by <a href="https://github.com/03kkim">Kyu Hong Kim</a>.
-        The <a href="https://github.com/03kkim/polyrhythm-bulma/tree/master">source code</a> is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-        </div>
-    </footer>
-    </>
   );
 }
 
