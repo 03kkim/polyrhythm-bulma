@@ -12,7 +12,6 @@
   - Solution: Use a useRef() hook to keep track of the beats, eliminating the need for time math completely
 - The issue seems to be that after a certain number of rerenders, the Tone.js audio breaks
   - I think the solution is useMemo(). Need to experiment, however
-  - 
 
 
 # Resources
@@ -29,4 +28,5 @@
 - Tone visual synchronization
   - https://github-wiki-see.page/m/Tonejs/Tone.js/wiki/Performance
   - "If you're using Tone.Transport, it is important that you do not make draw calls or DOM manipulations inside of the callback provided by Tone.Transport or any of the classes that extend Tone.Event (Part, Sequence, Pattern, Loop)"
-  - 
+- Hosting on github pages
+  - https://github.com/gitname/react-gh-pages

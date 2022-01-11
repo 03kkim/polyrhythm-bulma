@@ -85,17 +85,18 @@ function App() {
 
   return (
     <>
-    <div className="container is-fluid pt-5 has-text-centered pb-6">
+    <div className="container is-fluid pt-5 has-text-centered mb-6">
       <h2 className="title is-2">Polyrthm</h2>
       <p className="subtitle is-4">The web-based polyrhythm trainer</p>
       <div className="box">
-        <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} />
+        <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} spacing="mb-3" />
         <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
       </div>
     </div>
     <footer className="footer">
       <div className="content has-text-centered">
-        <strong>Polyrthm</strong> by <a href="https://github.com/03kkim">Kyu Hong Kim</a>
+        <strong>Polyrthm</strong> by <a href="https://github.com/03kkim">Kyu Hong Kim</a>.
+        The <a href="https://github.com/03kkim/polyrhythm-bulma/tree/master">source code</a> is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
         </div>
     </footer>
     </>
