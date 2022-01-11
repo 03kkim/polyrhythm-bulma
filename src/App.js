@@ -3,6 +3,7 @@ import * as Tone from "tone";
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { Button } from "./components/FlashingButton";
 import { RangeSlider } from "./components/RangeSlider";
+import { MainDiv, Box, Footer } from "./components/Elements.js";
 
 
 function App() {
@@ -21,9 +22,9 @@ function App() {
 
   // memoized function that is executed when the slider's value is changed (mouseup) 
   const sliderValueChanged = useCallback(val => {
-    console.log("NEW VALUE", val);
+    console.log("New tempo selected:", val);
     setTempo(val);
-  });
+  }, []);
 
   const [rhythmA, setRhythmA] = useState("4n");
   const attackReleaseLengthA = parseInt(rhythmA.replace('n', '') * 2).toString() + "n";
@@ -58,7 +59,7 @@ function App() {
     Tone.Transport.bpm.rampTo(tempo, 0.1);
   };
   useEffect(() => {
-    updateTempo()
+    updateTempo();
   }, [tempo]);
 
   const createLoop = (synth, note, attackReleaseLength, rhythm) => {
@@ -117,34 +118,27 @@ function App() {
 
   return (
     <div className="Site">
-      <main className="Site-content">
-        <div className="container is-fullhd has-text-centered my-6">
-          <h2 className="title is-2">Polyrthm</h2>
-          <p className="subtitle is-4">A web-based polyrhythm trainer</p>
-          <div className="box my-6">
-            <Button color={buttonColor} onClick={toggleTone} isPlaying={isPlaying} spacing="mb-3" buttonContent="Click me to start!" />
-            <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
-          </div>
-          <div className="box">
-            <div className="columns">
-              <div className="column">
-              <input id="text1" className="input" type="text" placeholder="Note 1 (default: quarter)" />
-              </div>
-              <div className="column">
-              <input id="text2" className="input" type="text" placeholder="Note 2 (default: quarter)" />
-              </div>
+      <MainDiv>
+        <h2 className="title is-2">Polyrthm</h2>
+        <p className="subtitle is-4">A web-based polyrhythm trainer</p>
+        <Box bulmaStyle="my-6">
+          <Button color={buttonColor} onClick={toggleTone} isPlaying={isPlaying} spacing="mb-3" buttonContent="Click me to start!" />
+          <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
+        </Box>
+        <Box>
+          <div className="columns">
+            <div className="column">
+            <input id="text1" className="input" type="text" placeholder="Note 1 (default: quarter)" />
             </div>
-            <h2 className="subtitle-6 mb-3">Make sure to restart the metronome!</h2>
-            <Button buttonContent="Change polyrhythm" onClick={changePolyrhythm}/>
+            <div className="column">
+            <input id="text2" className="input" type="text" placeholder="Note 2 (default: quarter)" />
+            </div>
           </div>
-        </div>
-      </main>
-      <footer className="footer">
-        <div className="content has-text-centered">
-          <strong>Polyrthm</strong> by <a href="https://github.com/03kkim">Kyu Hong Kim</a>.
-          The <a href="https://github.com/03kkim/polyrhythm-bulma/tree/master">source code</a> is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-          </div>
-      </footer>
+          <h2 className="subtitle-6 mb-3">Make sure to restart the metronome!</h2>
+          <Button buttonContent="Change polyrhythm" onClick={changePolyrhythm}/>
+        </Box>
+      </MainDiv>
+      <Footer />
     </div>
   );
 }
