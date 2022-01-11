@@ -85,14 +85,19 @@ function App() {
 
   return (
     <>
-    <div className="container is-fluid pt-5 has-text-centered">
+    <div className="container is-fluid pt-5 has-text-centered pb-6">
       <h2 className="title is-2">Polyrthm</h2>
-      <p class="subtitle is-4">The web-based polyrhythm trainer</p>
+      <p className="subtitle is-4">The web-based polyrhythm trainer</p>
       <div className="box">
         <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} />
         <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
       </div>
     </div>
+    <footer className="footer">
+      <div className="content has-text-centered">
+        <strong>Polyrthm</strong> by <a href="https://github.com/03kkim">Kyu Hong Kim</a>
+        </div>
+    </footer>
     </>
   );
 }
