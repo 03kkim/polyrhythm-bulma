@@ -2,7 +2,6 @@ import './App.sass';
 import * as Tone from 'tone';
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { Button } from "./components/FlashingButton";
-import { Slider } from "./components/Slider";
 import { RangeSlider } from "./components/RangeSlider";
 
 
@@ -10,13 +9,12 @@ function App() {
   const [buttonColor, setButtonColor] = useState("");
   const [isPlaying, setIsPlaying] = useState(false); 
   const [tempo, setTempo] = useState(60);
+
   const synthA = new Tone.FMSynth().toDestination();
-  const [parentVal, setParentVal] = useState(60);
-  
-        const sliderValueChanged = useCallback(val => {
-          console.log("NEW VALUE", val);
-          setParentVal(val);
-        });
+  const sliderValueChanged = useCallback(val => {
+    console.log("NEW VALUE", val);
+    setTempo(val);
+  });
 
   const clickLoop = useRef(null);
   // keeps track of current beat 
@@ -41,16 +39,12 @@ function App() {
     
   }
   const updateTempo = () => {
-    // console.log(event.target.value);
-    // sets the the variable "tempo" == "value" attribute of the slider
-    // setTempo(event.target.value);
-    // setTempo(document.getElementById("tempoSlider").value);
-    Tone.Transport.bpm.rampTo(parentVal, 0.1);
-    // console.log(tempo);
+    Tone.Transport.bpm.rampTo(tempo, 1);
   };
   useEffect(() => {
     updateTempo()
-  }, [parentVal]);
+  }, [tempo]);
+
   const startTone = () => {
     if (isPlaying) {
       setIsPlaying(false);
@@ -63,42 +57,38 @@ function App() {
       clickLoop.current = new Tone.Loop((time) => {
         synthA.triggerAttackRelease("C2", attackReleaseLength, time);
         console.log(time);
-        currentBeat.current = currentBeat.current + 1;
-        changeButtonColor();
+        Tone.Draw.schedule(() => {
+          currentBeat.current = currentBeat.current + 1;
+          // changeButtonColor();
+        }, time)
+        
       }, subdivisionLength);
-      clickLoop.current.start(1);
-      Tone.Transport.start();
+      clickLoop.current.start("+0.1");
+      Tone.Transport.start("+0.1");
       // sets Transport's BPM
-      Tone.Transport.bpm.value = parentVal;
+      Tone.Transport.bpm.value = tempo;
       console.log("audio is ready");
     }
   }
-  // document.querySelector('button')?.addEventListener('click', async () => {
-  //   await Tone.start();
-  //   return('ahslkjdhlas')
-  //   startTone();
-  // })
+
   const sliderProps = useMemo(
     () => ({
       min: 0,
       max: 100,
-      value: parentVal,
+      value: tempo,
       step: 2,
-      label: "This is a reusable slider",
+      label: "Set your tempo with this slider:",
       onChange: e => sliderValueChanged(e)
     }),
-    [parentVal]
+    [tempo]
   );
+
   return (
     <div>
       <div className="box has-text-centered">
         <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} />
       </div>
-      <Slider onChange={updateTempo} defaultValue={tempo} min={33} max={300} step="1" id="tempoSlider"/>
-      <h1>{tempo}</h1>
-      {/* <Button color="success" onClick={updateTempo} /> */}
-      <h1>{parentVal}</h1>
-      <RangeSlider {...sliderProps} min={33} max={300} />
+      <RangeSlider {...sliderProps} min={33} max={1000} />
       
     </div>
   );

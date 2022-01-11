@@ -1,3 +1,5 @@
+// Original code credit to Kalhan.Toress: https://stackoverflow.com/questions/62725470/creat-range-slider-in-react-js
+
 import React, {
     memo,
     useState,
@@ -26,7 +28,7 @@ export const RangeSlider = memo(
     return (
     <div className="range-slider">
         <p>{label}</p>
-        <h3>value: {sliderVal}</h3>
+        <h3>Quarter = {sliderVal}</h3>
         <input
         type="range"
         value={sliderVal}
