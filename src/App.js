@@ -8,7 +8,7 @@ import { RangeSlider } from "./components/RangeSlider";
 function App() {
   const [buttonColor, setButtonColor] = useState("");
   const [isPlaying, setIsPlaying] = useState(false); 
-  const [tempo, setTempo] = useState(60);
+  const [tempo, setTempo] = useState(120);
 
   const synthA = new Tone.MembraneSynth().toDestination();
   const synthB = new Tone.MembraneSynth().toDestination();
@@ -17,9 +17,11 @@ function App() {
     setTempo(val);
   });
 
-  const [rhythmA, setRhythmA] = useState("1n");
-  const [rhythmB, setrhythmB] = useState("1n");
+  const [rhythmA, setRhythmA] = useState("4n");
+  const attackReleaseLengthA = parseInt(rhythmA.replace('n', '') * 2).toString() + "n";
 
+  const [rhythmB, setRhythmB] = useState("4n");
+  const attackReleaseLengthB = parseInt(rhythmB.replace('n', '') * 2).toString() + "n";
 
   const clickLoopA = useRef(null);
   const clickLoopB = useRef(null);
@@ -27,8 +29,7 @@ function App() {
   // keeps track of current beat 
   const currentBeat = useRef(0);
 
-  const subdivisionLengthA = "4n";
-  const attackReleaseLengthA = parseInt(subdivisionLengthA.replace('n', '') * 2).toString() + "n";
+
   /**
    * CREDIT TO RENZO (renzol2) FOR FIGURING THIS OUT
    * Changes button color based on time:
@@ -52,37 +53,39 @@ function App() {
     updateTempo()
   }, [tempo]);
 
+  const createLoop = (note, attackReleaseLength, rhythm) => {
+    return new Tone.Loop((time) => {
+      synthA.triggerAttackRelease(note, attackReleaseLength, time);
+      console.log(time);
+      currentBeat.current = currentBeat.current + 1;
+    }, rhythm);
+  }
+  const stopTone = () => {
+    setIsPlaying(false);
+    clickLoopA.current.dispose();
+    clickLoopB.current.dispose();
+    Tone.Transport.cancel();
+    console.log("stop audio");
+  }
   const startTone = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      clickLoopA.current.dispose();
-      clickLoopB.current.dispose();
-      Tone.Transport.cancel();
-      console.log("stop audio");
-    } else {
-      setIsPlaying(true);
+    setIsPlaying(true);
       // The loop is initialized in clickLoop, which is a useRef() which means that it persists through renders
-      clickLoopA.current = new Tone.Loop((time) => {
-        synthA.triggerAttackRelease("C1", attackReleaseLengthA, time);
-        console.log(time);
-        currentBeat.current = currentBeat.current + 1;
+      clickLoopA.current = createLoop("C1", attackReleaseLengthA, rhythmA)
+      clickLoopB.current = createLoop("E2", attackReleaseLengthB, rhythmB) 
 
-        
-      }, subdivisionLengthA);
+      clickLoopA.current.start(0.2);
+      clickLoopB.current.start(0.2);
 
-      clickLoopB.current = new Tone.Loop((time) => {
-        synthA.triggerAttackRelease("C2", attackReleaseLengthA, time);
-        console.log(time);
-        currentBeat.current = currentBeat.current + 1;
-        
-      }, "5n");
-
-      clickLoopA.current.start();
-      clickLoopB.current.start();
-      Tone.Transport.start();
+      Tone.Transport.start(0.3);
       // sets Transport's BPM
       Tone.Transport.bpm.value = tempo;
       console.log("audio is ready");
+  }
+  const toggleTone = () => {
+    if (isPlaying) {
+      stopTone();
+    } else {
+      startTone();
     }
   }
 
@@ -97,27 +100,32 @@ function App() {
     }),
     [tempo]
   );
+  
+  const changePolyrhythm = () => {
+    setRhythmA(document.getElementById('text1').value + "n");
+    setRhythmB(document.getElementById('text2').value + "n");
+  }
 
   return (
     <div className="Site">
-      <main class="Site-content">
-      <div className="container is-fluid pt-5 has-text-centered mb-6">
+      <main className="Site-content">
+      <div className="container is-fullhd pt-5 has-text-centered mb-6">
         <h2 className="title is-2">Polyrthm</h2>
         <p className="subtitle is-4">The web-based polyrhythm trainer</p>
         <div className="box mb-6">
-          <Button color={buttonColor} onClick={startTone} isPlaying={isPlaying} spacing="mb-3" buttonContent="Click me to start!" />
+          <Button color={buttonColor} onClick={toggleTone} isPlaying={isPlaying} spacing="mb-3" buttonContent="Click me to start!" />
           <RangeSlider {...sliderProps} min={33} max={300} step="0.5" />
         </div>
         <div className="box">
           <div className="columns">
             <div className="column">
-            <input className="input" type="text" placeholder="Note 1" />
+            <input id="text1" className="input" type="text" placeholder="Note 1 (default: quarter)" />
             </div>
             <div className="column">
-            <input className="input" type="text" placeholder="Note 2" />
+            <input id="text2" className="input" type="text" placeholder="Note 2 (default: quarter)" />
             </div>
           </div>
-          <Button buttonContent="Change polyrhythm" />
+          <Button buttonContent="Change polyrhythm" onClick={changePolyrhythm}/>
         </div>
       </div>
       </main>
